@@ -1,18 +1,17 @@
 import { useEffect, useState } from "react";
 import InputForm from "./components/InputForm";
 import List from "./components/List";
+import UrlPlaceholder from "../src/Urls/UrlPlaceholder";
 import { ShoppingItem } from "./types/ShoppingItem";
-import UrlPlacwholder from "./Urls/UrlPlacwholder";
-
 
 function App() {
   const [items, setItems] = useState<ShoppingItem[]>([]);
 
   useEffect(() => {
     setItems([
-      { id: 1, product: "Apple", isChecked: false },
-      { id: 2, product: "Banana", isChecked: false },
-      { id: 3, product: "Orange", isChecked: false },
+      { id: 1, product: "Apple", isChecked: false, source: "local" },
+      { id: 2, product: "Banana", isChecked: false, source: "local" },
+      { id: 3, product: "Orange", isChecked: false, source: "local" },
     ]);
   }, []);
 
@@ -27,7 +26,7 @@ function App() {
   const checkItem = (id: number) => {
     setItems((prevItems) =>
       prevItems.map(item =>
-        item.id !== id ? item : { ...item, isChecked: true }
+        item.id === id ? { ...item, isChecked: true } : item
       )
     );
   };
@@ -35,7 +34,7 @@ function App() {
   const uncheckItem = (id: number) => {
     setItems((prevItems) =>
       prevItems.map(item =>
-        item.id !== id ? item : { ...item, isChecked: false }
+        item.id === id ? { ...item, isChecked: false } : item
       )
     );
   };
@@ -44,7 +43,7 @@ function App() {
     <div>
       <InputForm addItem={addItem} />
       <List items={items} functions={{ removeItem, checkItem, uncheckItem }} />
-      <UrlPlacwholder/>
+      <UrlPlaceholder addItem={addItem} />
     </div>
   );
 }

@@ -2,6 +2,7 @@ export interface ShoppingItem {
   id: number;
   product: string;
   isChecked: boolean;
+  source?: string; 
 }
 
 export type ShoppingItemFunctions = {

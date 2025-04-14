@@ -1,7 +1,6 @@
 import { ShoppingItem } from "../types/ShoppingItem";
 
 function InputForm({ addItem }: { addItem: (item: ShoppingItem) => void }) {
-
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
     const form = event.target as HTMLFormElement;
@@ -13,18 +12,19 @@ function InputForm({ addItem }: { addItem: (item: ShoppingItem) => void }) {
         id: Date.now(),
         product,
         isChecked: false,
+        source: "local",
       };
       while (Date.now() === newItem.id);
       addItem(newItem);
       form.reset();
     }
-  }
-  
+  };
+
   return (
     <>
       <form onSubmit={handleSubmit}>
         <input type="text" name="product" placeholder="Enter a new item" />
-        <button type="submit" >Add item</button>
+        <button type="submit">Add item</button>
       </form>
     </>
   );

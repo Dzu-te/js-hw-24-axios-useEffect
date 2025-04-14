@@ -8,7 +8,11 @@ function List({ items, functions }: {
   return (
     <ul>
       {items.map((item) => (
-        <ListItem key={item.id} {...item} {...functions} />
+        <ListItem
+          key={`${item.source ? item.source + "-" : ""}${item.id}`}
+          {...item}
+          {...functions}
+        />
       ))}
     </ul>
   );
